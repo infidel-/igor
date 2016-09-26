@@ -22,12 +22,11 @@ Justice-Angel
 Priestess-Apsaras
 Hermit-Yomotsu Shikome
 
-xp, level up
 boss
 game over - show xp, level and max dungeon level
 disable admin commands in production!
 admin commands - try to make them available to admins
-absorb, reflect damage
+? absorb, reflect damage
 
 # STAGE 2
 =========

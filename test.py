@@ -170,12 +170,15 @@ msg1 = [
 # random battle
 msg_battle = [
   "start",
+  "info",
   "dungeon",
 
   "admin battle",
   "analyze",
   "skill",
   "attack",
+  "admin kill",
+  "info",
   ]
 
 

@@ -167,7 +167,10 @@ class Battle:
 
 # win battle
   def finishWin(self):
-    self.player.say('You win the battle.')
+    exp = self.shadow.exp
+    self.player.say('You win the battle. You gain ' + str(exp) + \
+      ' experience.')
+    self.player.giveExp(exp)
     self.player.state = PlayerState.IDLE
     self.player.dungeon.shadow = False
 

@@ -26,3 +26,10 @@ class Admin:
       player.dungeon.shadow = True
       Game.attack(player)
 
+    # BATTLE: kill shadow
+    elif (cmd == 'kill'):
+      if (player.state != PlayerState.BATTLE):
+        return
+      player.battle.shadow.hp = 0
+      Game.attack(player)
+

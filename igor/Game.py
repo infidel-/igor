@@ -12,11 +12,15 @@ class Game:
 
     # ANY: help
     if (cmd in [ 'help', 'h' ]):
-      player.say(';help - show this list, ;look - look around (shows a list of commands), ;start - (re)start a game')
+      player.say(';help - show this list, ;look - look around (shows a list of commands), ;start - (re)start a game, ;info - player stats and info')
 
     # ANY: look around
     elif (cmd in [ 'look', 'l', 'x' ]):
       Game.look(player)
+
+    # ANY: stats
+    elif (cmd in [ 'info', 'stats', 'st', 'i' ]):
+      player.stats()
 
     # VELVET: go to dungeon
     elif (cmd in [ 'dungeon', 'dung', 'dun' ]):
