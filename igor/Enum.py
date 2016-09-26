@@ -10,6 +10,13 @@ class Location(Enum):
   VELVET_ROOM = 0
   DUNGEON = 1
 
+class DamageType(Enum):
+  Phys = 0,
+  Fire = 1,
+  Ice = 2,
+  Elec = 3,
+  Wind = 4,
+
 class Arcana(Enum):
   Fool = 0,
   Magician = 1,

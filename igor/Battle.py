@@ -50,10 +50,26 @@ class Battle:
     self.player.say(s)
 
 
+# damage formula
+  def damageFormula(self, power, damageType, target):
+    # block damage
+    if (damageType in target.block):
+      return 0
+
+    rnd = 100.0 + random.randint(-5, 5)
+    damage = 5 * (power / 100.0) * (rnd / 100.0)
+    if (damageType in target.weak):
+      damage *= 1.5
+    elif (damageType in target.strong):
+      damage *= 0.5
+
+    return int(damage)
+
+
 # attack shadow
   def attack(self):
     # damage to shadow
-    damage = 10
+    damage = self.damageFormula(100, DamageType.Phys, self.shadow)
     self.shadow.hp -= damage
     self.player.say('You hit ' + self.shadow.name + ' for ' + str(damage) +
       ' damage.')
@@ -85,9 +101,7 @@ class Battle:
       self.player.sp -= cost
 
     # calc and apply damage
-    rnd = 100.0 + random.randint(-5, 5)
-    damage = int(5 * (skill.power / 100.0) * (rnd / 100.0))
-
+    damage = self.damageFormula(skill.power, skill.damageType, self.shadow)
     self.shadow.hp -= damage
     self.player.say('You cast ' + skill.name + ' for ' + str(damage) +
       ' damage.')
@@ -111,7 +125,9 @@ class Battle:
     self.shadow.name = self.shadow.trueName
     self.player.shadowsKnown.append(self.shadow.trueName)
 
-    self.player.say('This shadow is called ' + self.shadow.name + '.')
+    s = 'This shadow is called ' + self.shadow.name + '.'
+    s += ' ' + self.shadow.getInfo()
+    self.player.say(s)
 
     # shadow response
     self.shadowAction()
@@ -131,11 +147,14 @@ class Battle:
 
 # shadow action
   def shadowAction(self):
+    power = 100
+#    if (self.shadow.skill != None):
+
     # damage to player
-    shadowDamage = 5
-    self.player.hp -= shadowDamage
+    damage = self.damageFormula(power, DamageType.Phys, self.player.persona)
+    self.player.hp -= damage
     self.player.say(self.shadow.name.capitalize() + ' hits you for ' +
-      str(shadowDamage) + ' damage.')
+      str(damage) + ' damage.')
 
     # player is dead, lose battle
     if (self.player.hp <= 0):

@@ -5,15 +5,16 @@
   attack power (weapon)
 + skill
   remove skill command when not enough hp or sp
-  damage types
 shadow skills for sp
 proper shadow attack
+shadow power skill from level
 
 shadow hp from its base level (+ bonus from actual level)
 tougher overleveled shadows?
+interactive python test
 
 Damage types: melee, shooting, magic
-Persona stats - One Skill, Defence Types List, Level, Arcana
+different starting personas
 Fool-Orpheus
 Lovers-Pixie
 Magician-Nekomata
@@ -26,6 +27,7 @@ boss
 game over - show xp, level and max dungeon level
 disable admin commands in production!
 admin commands - try to make them available to admins
+absorb, reflect damage
 
 # STAGE 2
 =========
@@ -81,6 +83,29 @@ Hetto-Firudo
 # DOCUMENTATION
 ===============
 
+ ______________________________________________________________________
+|                                                                      |
+| + Izanagi +                                                  [00P01] |
+|______________________________________________________________________|
+|----------------------------------------------------------------------|
+|   LV   || ST | MA | EN | AG | LU || PH | FI | IC | EL | WI | LI | DA |
+|        ||------------------------||----------------------------------|
+|    1   ||  3 |  2 |  2 |  3 |  2 ||    |    |    | Rs | Wk |    | Nu |
+|==================================||==================================|
+| SKILLS                           || RESTRICTIONS                     |
+|----------------------------------||----------------------------------|
+| Zio ......................... -- || Inheritance ............... Elec |
+| Cleave ...................... -- ||__________________________________|
+| Rakukaja .................... -- ||                                  |
+| Rakunda .....................  3 || - Unique Fusion:                 |
+| Tarukaja ....................  5 ||   Yomotsu-Shikome (0)            |
+|                                  ||   Obariyon (0)                   |
+|                                  ||                                  |
+|======================================================================|
+| One of the ancient gods who existed before Japan was formed. He      |
+| created the Ouyashima from chaos, then gave birth to countless       |
+| children and laid the foundation of soil and nature.                 |
+ ----------------------------------------------------------------------
  7a. Damage                                                             [007a0]
 
 

@@ -29,6 +29,26 @@ class Shadow:
     if (not isKnown):
       self.name = "the shadow"
 
+# get info string
+  def getInfo(self):
+    s = '[Lv ' + str(self.level)
+    if (len(self.weak) > 0):
+      s += ', Weak:'
+      for t in self.weak:
+        s += ' ' + t.name
+    if (len(self.strong) > 0):
+      s += ', Strong:'
+      for t in self.strong:
+        s += ' ' + t.name
+    if (len(self.block) > 0):
+      s += ', Block:'
+      for t in self.block:
+        s += ' ' + t.name
+    s += ']'
+
+    return s
+
+
 
 ######################################
 
@@ -45,11 +65,11 @@ ShadowList['Lying Hablerie'] = PersonaStats(
   exp = 24,
   yen = 180,
   skill = None,
-  weak = (),
-  strong = (),
-  block = (),
-  absorb = (),
-  reflect = (),
+  weak = [ DamageType.Ice, DamageType.Elec ],
+  strong = [ DamageType.Fire ],
+  block = [],
+  absorb = [],
+  reflect = [],
   )
 
 ShadowList['Calm Pesce'] = PersonaStats(
@@ -62,11 +82,11 @@ ShadowList['Calm Pesce'] = PersonaStats(
   exp = 38,
   yen = 180,
   skill = None,
-  weak = (),
-  strong = (),
-  block = (),
-  absorb = (),
-  reflect = (),
+  weak = [ DamageType.Wind ],
+  strong = [ DamageType.Phys ],
+  block = [ DamageType.Ice ],
+  absorb = [],
+  reflect = [],
   )
 """
 ShadowList[''] = PersonaStats(
@@ -79,11 +99,11 @@ ShadowList[''] = PersonaStats(
   exp = ,
   yen = ,
   skill = None,
-  weak = (),
-  strong = (),
-  block = (),
-  absorb = (),
-  reflect = (),
+  weak = [],
+  strong = [],
+  block = [],
+  absorb = [],
+  reflect = [],
   )
 """
 

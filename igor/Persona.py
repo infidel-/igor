@@ -32,29 +32,46 @@ class PersonaSkill:
 
 # get skill cost
   def getCost(self, player):
-    c = self.cost[0]
-    if (self.cost[1] == '%'):
-      c = (player.maxHP if self.costType == 'HP' else player.maxSP) * c / 100.0
+    c = self.cost
+    if (self.costType == 'HP'):
+      c = player.maxHP * c / 100.0
       c = int(c)
     return c
 
 
 ######################################
 
+SkillList = dict()
+SkillList['Bash'] = PersonaSkill(
+  name = 'Bash',
+  cost = 7,
+  costType = 'HP',
+  damageType = DamageType.Phys,
+  power = 120,
+  )
+SkillList['Zio'] = PersonaSkill(
+  name = 'Zio',
+  cost = 4,
+  costType = 'SP',
+  damageType = DamageType.Elec,
+  power = 80,
+  )
+
+######################################
+
 PersonaList = dict()
 
 # Fool Arcana
-PersonaList['Orpheus'] = PersonaStats(
-  name = 'Orpheus',
+PersonaList['Izanagi'] = PersonaStats(
+  name = 'Izanagi',
   arcana = Arcana.Fool,
   level = 1,
-  hp = 20,
-  skill = PersonaSkill(
-    name = 'Bash',
-    cost = (7, '%'),
-    costType = 'HP',
-    power = 120,
-    )
+  skill = SkillList['Zio'],
+  weak = [ DamageType.Wind ],
+  strong = [ DamageType.Elec ],
+  block = [],
+  absorb = [],
+  reflect = [],
   )
 
 # Chariot Arcana
@@ -62,11 +79,10 @@ PersonaList['Slime'] = PersonaStats(
   name = 'Slime',
   arcana = Arcana.Chariot,
   level = 2,
-  hp = 20,
-  skill = PersonaSkill(
-    name = 'Bash',
-    cost = (7, '%'),
-    costType = 'HP',
-    power = 120,
-    )
+  skill = SkillList['Bash'],
+  weak = [],
+  strong = [],
+  block = [],
+  absorb = [],
+  reflect = [],
   )

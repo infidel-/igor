@@ -176,9 +176,6 @@ msg_battle = [
   "analyze",
   "skill",
   "attack",
-  "retreat",
-  "retreat",
-  "retreat",
   ]
 
 

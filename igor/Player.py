@@ -23,7 +23,7 @@ class Player:
 
   def __init__(self, name):
     self.name = name
-    self.persona = Persona('Orpheus')
+    self.persona = Persona('Izanagi')
     self.personaKnown = []
     self.shadowsKnown = []
     self.dungeon = Dungeon()
