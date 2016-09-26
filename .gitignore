@@ -1,0 +1,8 @@
+*.swp
+*.pyc
+__cache__
+up
+sopel*
+idlerpg
+Persona*.txt
+

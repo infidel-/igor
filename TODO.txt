@@ -1,0 +1,120 @@
+# STAGE 1
+=========
+
++ attack
+  attack power (weapon)
++ skill
+  remove skill command when not enough hp or sp
+  damage types
+shadow skills for sp
+proper shadow attack
+
+shadow hp from its base level (+ bonus from actual level)
+tougher overleveled shadows?
+
+Damage types: melee, shooting, magic
+Persona stats - One Skill, Defence Types List, Level, Arcana
+Fool-Orpheus
+Lovers-Pixie
+Magician-Nekomata
+Justice-Angel
+Priestess-Apsaras
+Hermit-Yomotsu Shikome
+
+xp, level up
+boss
+game over - show xp, level and max dungeon level
+disable admin commands in production!
+admin commands - try to make them available to admins
+
+# STAGE 2
+=========
+
+items - usables + weapon
+analyze - persona descriptions
+on X hints auto-analyze
+
+Lying Hablerie
+It has a black tongue.
+It has strange stripes.
+It's floating.
+I don't see any eyes.
+
+Calm Pesce
+What's this, a sea creature?
+It looks like a dolphin...
+It's hollow?!
+
+Trance Twins
+2 on 1? How unfair!
+Wait, are they connected?
+Is that an antenna?
+
+Black Raven
+Hey we have these on the other side.
+Why is it holding a lantern?
+Isn't that too heavy for a bird?
+
+Magic Hand
+Wasn't this in the game Glover?
+What a cute little tuxedo.
+How many fingers is it holding up?
+
+Positive King
+Good evening my lord...
+When'd the Monopoly guy become a...?
+This guy's a royal pain in the...!
+Stay positive!
+
+Bronze Dice
+What do you think this is--a game?
+Don't look at me with those snake eyes!
+I don't give a craps what you think!
+
+crowdsource persona hints and descriptions
+
+secret boss:
+Hetto-Firudo
+"Foh hum za be-ru tor-ru-zo!"
+"E-ehk-sit-to rai-to! E-en-tor-ru nai-to!"
+
+# DOCUMENTATION
+===============
+
+ 7a. Damage                                                             [007a0]
+
+
+Ever wonder how damage works? Well, wonder no more... kind of.
+
+There is a way to roughly approximate how much damage you're going to do to an
+enemy. Use the following formula:
+
+DMG = 5 x sqrt(ST/EN x ATK) x MOD x HITS X RND
+
+DMG = Damage
+ST  = Character's Strength stat
+EN  = Enemy's Endurance stat
+ATK = Atk value of equipped weapon OR Pwr value of used skill
+MOD = Modifier based on the difference between character level and enemy level
+HITS= Number of hits (for physical skills)
+RND = Randomness factor (according to DragoonKain33, may be roughly between
+      0.95 and 1.05)
+
+
+From what I've seen, MOD tops out at around 1.6, and I'm sure that there's a
+minimum as well. Yes, this means that damage scales similar to how experience
+scales.
+
+By the way, if an enemy is Downed, your attack will do ~+30% damage. If you
+inflict a critical hit, your attack will do ~+60% damage. If the enemy is
+Downed AND you inflict a critical hit, the modifiers stack and you will be
+doing double damage.
+
+Now, I can't claim to know how exactly the numbers work when an enemy attacks
+you. I haven't been able to fit armor into the equation just yet. But this, I
+think, is more important because we can estimate how much damage we do with
+various weapons and skills, as well as compare amongst weapons and skills.
+
+Update: I've been informed by Look Over There that armor defense serves only to
+reduce physical damage and not magic damage. Makes sense to me.
+
