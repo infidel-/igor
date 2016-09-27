@@ -31,26 +31,6 @@ class Shadow:
     if (not isKnown):
       self.name = "the shadow"
 
-# get info string
-  def getInfo(self):
-    s = '[Lv ' + str(self.level)
-    if (len(self.weak) > 0):
-      s += ', Weak:'
-      for t in self.weak:
-        s += ' ' + t.name
-    if (len(self.strong) > 0):
-      s += ', Strong:'
-      for t in self.strong:
-        s += ' ' + t.name
-    if (len(self.block) > 0):
-      s += ', Block:'
-      for t in self.block:
-        s += ' ' + t.name
-    s += ']'
-
-    return s
-
-
 
 ######################################
 

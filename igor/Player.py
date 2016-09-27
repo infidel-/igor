@@ -4,7 +4,7 @@ from .Global import *
 from .Enum import *
 from .Dungeon import Dungeon
 from .Battle import Battle
-from .Persona import Persona
+from .Persona import *
 
 class Player:
   location = Location.VELVET_ROOM
@@ -73,7 +73,8 @@ class Player:
     s += ', HP ' + str(self.hp) + '/' + str(self.maxHP) + \
       ', SP ' + str(self.sp) + '/' + str(self.maxSP) + '.'
 #      ', LV ' + str(self.persona.level) + \
-    s += ' Persona: ' + self.persona.name + \
+    s += ' Persona: ' + self.persona.name + ' ' + \
+      getPersonaInfo(self.persona) + \
       ' (' + self.persona.skill.getNameAndCost(self) + ').'
     self.say(s)
 

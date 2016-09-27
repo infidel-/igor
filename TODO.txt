@@ -1,8 +1,6 @@
 # STAGE 1
 =========
 
-shadow skill use
-remove skill command when not enough hp or sp
 tougher overleveled shadows?
 interactive python test
 

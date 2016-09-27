@@ -13,6 +13,25 @@ class Persona:
     self.__dict__.update(o.__dict__)
 
 
+# get info string
+def getPersonaInfo(persona):
+  s = '[Lv ' + str(persona.level)
+  if (len(persona.weak) > 0):
+    s += ', Weak:'
+    for t in persona.weak:
+      s += ' ' + t.name
+  if (len(persona.strong) > 0):
+    s += ', Strong:'
+    for t in persona.strong:
+      s += ' ' + t.name
+  if (len(persona.block) > 0):
+    s += ', Block:'
+    for t in persona.block:
+      s += ' ' + t.name
+  s += ']'
+
+  return s
+
 # persona stats
 
 class PersonaStats:

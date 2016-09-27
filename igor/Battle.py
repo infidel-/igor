@@ -34,14 +34,22 @@ class Battle:
   def look(self):
     cmds = []
     cmds.append('attack')
-    cmds.append('skill')
+
+    # show skill action only if enough HP/SP
+    skill = self.player.persona.skill
+    cost = skill.getCost(self.player)
+    val = self.player.hp if skill.costType == 'HP' else self.player.sp
+    if (cost < val):
+      cmds.append('skill')
+
     if (not self.shadow.isKnown):
       cmds.append('analyze')
     cmds.append('retreat')
     s = 'You are in a battle with ' + self.shadow.name + '.'
     s += ' You have ' + str(self.player.hp) + '/' + str(self.player.maxHP) + \
       ' HP, ' + str(self.player.sp) + '/' + str(self.player.maxSP) + ' SP.'
-    s += ' Your persona is ' + self.player.persona.name + ' (' + \
+    s += ' Your persona is ' + self.player.persona.name + ' ' + \
+      getPersonaInfo(self.player.persona) + ' (' + \
       self.player.persona.skill.getNameAndCost(self.player) + ').'
     self.player.say(s)
 
@@ -103,8 +111,8 @@ class Battle:
     # calc and apply damage
     damage = self.damageFormula(skill.power, skill.damageType, self.shadow)
     self.shadow.hp -= damage
-    self.player.say('You cast ' + skill.name + ' for ' + str(damage) +
-      ' damage.')
+    self.player.say('You cast ' + skill.name + ' on ' + self.shadow.name + \
+      ' for ' + str(damage) + ' damage.')
 
     # shadow is dead, win battle
     if (self.shadow.hp <= 0):
@@ -126,7 +134,7 @@ class Battle:
     self.player.shadowsKnown.append(self.shadow.trueName)
 
     s = 'This shadow is called ' + self.shadow.name + '.'
-    s += ' ' + self.shadow.getInfo()
+    s += ' ' + getPersonaInfo(self.shadow)
     self.player.say(s)
 
     # shadow response
@@ -147,14 +155,28 @@ class Battle:
 
 # shadow action
   def shadowAction(self):
-#    if (self.shadow.skill != None):
+    # randomly use skill
+    rnd = random.randint(0, 100)
+    damage = 0
+    msg = ''
+    if (self.shadow.skill != None and rnd < 30):
+      skill = self.shadow.skill
 
-    # damage to player
-    damage = self.damageFormula(self.shadow.atk, DamageType.Phys,
-      self.player.persona)
+      # calc and apply damage
+      damage = self.damageFormula(skill.power, skill.damageType,
+        self.player.persona)
+      self.shadow.hp -= damage
+      msg = self.shadow.name.capitalize() + ' casts ' + skill.name + \
+        ' on you for ' + str(damage) + ' damage.'
+    else:
+      # damage to player
+      damage = self.damageFormula(self.shadow.atk, DamageType.Phys,
+        self.player.persona)
+      msg = self.shadow.name + ' hits you for ' + \
+        str(damage) + ' damage.'
+
     self.player.hp -= damage
-    self.player.say(self.shadow.name.capitalize() + ' hits you for ' +
-      str(damage) + ' damage.')
+    self.player.say(msg)
 
     # player is dead, lose battle
     if (self.player.hp <= 0):

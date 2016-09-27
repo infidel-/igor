@@ -174,6 +174,10 @@ msg_battle = [
   "dungeon",
 
   "admin battle",
+  "admin kill",
+  "admin dungeon 3",
+
+  "admin battle",
   "analyze",
   "skill",
   "attack",
