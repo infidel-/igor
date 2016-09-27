@@ -7,6 +7,7 @@ class Shadow:
   player = None
   hp = 0
   sp = 0
+  atk = 0
   isKnown = False
   trueName = None
 
@@ -23,6 +24,7 @@ class Shadow:
     # fix stats
     self.maxHP = self.hp
     self.maxSP = self.sp
+    self.atk = ShadowAtk[self.level]
 
     # analyzed or not
     isKnown = (self.name in self.player.shadowsKnown)
@@ -54,6 +56,7 @@ class Shadow:
 
 global SkillList
 
+ShadowAtk = [ 0, 40, 50, 60, 70, 75, 80, 90, 100, 110, 120 ]
 ShadowCache = dict()
 ShadowList = dict()
 

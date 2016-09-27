@@ -1,11 +1,8 @@
 # STAGE 1
 =========
 
-attack power (weapon)
+shadow skill use
 remove skill command when not enough hp or sp
-shadow skills
-shadow attack power
-shadow power skill from level
 tougher overleveled shadows?
 interactive python test
 

@@ -15,6 +15,7 @@ class Player:
   maxSP = 0
   exp = 0
   level = 1
+  atk = 0
   dungeon = None
   battle = None
   persona = None
@@ -28,6 +29,7 @@ class Player:
     self.maxHP = self.hp
     self.sp = LevelSP[1]
     self.maxSP = self.sp
+    self.atk = LevelAtk[1]
     self.name = name
     self.persona = Persona('Izanagi')
     self.personaKnown = []
@@ -38,7 +40,6 @@ class Player:
 
 # give experience and potentially new level
   def giveExp(self, exp):
-    global LevelXP, LevelHP, LevelSP
     self.exp += exp
     newlevel = self.level
     maxexp = 0
@@ -60,14 +61,15 @@ class Player:
     self.maxHP = self.hp
     self.sp = LevelSP[self.level]
     self.maxSP = self.sp
+    self.atk = LevelAtk[self.level]
     self.say('Leveru Uppu! You have gained level ' + str(self.level) + '!')
 
 
 # print stats
   def stats(self):
-    global LevelXP
     s = 'LV ' + str(self.level) + ', XP ' + str(self.exp) + '/' + \
       str(LevelXP[self.level])
+    s += ', ATK ' + str(self.atk)
     s += ', HP ' + str(self.hp) + '/' + str(self.maxHP) + \
       ', SP ' + str(self.sp) + '/' + str(self.maxSP) + '.'
 #      ', LV ' + str(self.persona.level) + \
@@ -81,6 +83,7 @@ class Player:
     globals['bot'].say('/w ' + self.name + ' ' + msg)
 
 
+LevelAtk = [ 0, 42, 53, 60, 71, 78, 88, 108, 130, 140, 152 ]
 LevelHP = [ 0, 70, 82, 90, 105, 116, 126, 136, 146, 155, 164 ]
 LevelSP = [ 0, 41, 49, 56, 64, 72, 77, 84, 90, 96, 102 ]
 LevelXP = [ 0, ]
