@@ -1,7 +1,6 @@
 # STAGE 1
 =========
 
-tougher overleveled shadows?
 interactive python test
 
 different starting personas

@@ -21,7 +21,12 @@ class Battle:
     self.player.state = PlayerState.BATTLE
 
     # find random shadow for that level
+    # randomly get level +1 shadow
     floor = self.player.dungeon.level
+    if (random.randint(0, 100) < 5 and floor < self.player.dungeon.maxLevel):
+      floor += 1
+      self.player.say('This shadow is out of place here!')
+
     if (not floor in ShadowCache):
       raise Exception("No shadows for floor " + str(floor))
     sh = random.choice(ShadowCache[floor])

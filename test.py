@@ -175,7 +175,7 @@ msg_battle = [
 
   "admin battle",
   "admin kill",
-  "admin dungeon 3",
+  "admin dungeon 2",
 
   "admin battle",
   "analyze",
