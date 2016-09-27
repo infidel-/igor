@@ -52,6 +52,8 @@ class Shadow:
 
 ######################################
 
+global SkillList
+
 ShadowCache = dict()
 ShadowList = dict()
 
@@ -88,6 +90,117 @@ ShadowList['Calm Pesce'] = PersonaStats(
   absorb = [],
   reflect = [],
   )
+
+ShadowList['Trance Twins'] = PersonaStats(
+  name = 'Trance Twins',
+  arcana = Arcana.Hierophant,
+  floor = (3, 5),
+  level = 7,
+  hp = 122,
+  sp = 62,
+  exp = 61,
+  yen = 200,
+  # TODO: skill = SkillList['Mabufu'],
+  skill = SkillList['Bufu'],
+  weak = [],
+  strong = [ DamageType.Phys ],
+  block = [ DamageType.Ice, DamageType.Elec, DamageType.Wind ],
+  absorb = [],
+  reflect = [],
+  )
+
+ShadowList['Black Raven'] = PersonaStats(
+  name = 'Black Raven',
+  arcana = Arcana.Hermit,
+  floor = (3, 7),
+  level = 7,
+  hp = 108,
+  sp = 25,
+  exp = 57,
+  yen = 180,
+  #  TODO: skill = SkillList['Tarukaja'],
+  skill = None,
+  weak = [ DamageType.Elec ],
+  strong = [],
+  block = [ DamageType.Fire, DamageType.Wind ],
+  absorb = [],
+  reflect = [],
+  )
+
+ShadowList['Magic Hand'] = PersonaStats(
+  name = 'Magic Hand',
+  arcana = Arcana.Magician,
+  floor = (3, 5),
+  level = 8,
+  hp = 130,
+  sp = 10,
+  exp = 77,
+  yen = 190,
+  skill = SkillList['Agi'],
+  # TODO: skill2 = SkillList['Blue Wall'],
+  weak = [ DamageType.Ice ],
+  strong = [],
+  block = [],
+  absorb = [],
+  reflect = [],
+  )
+
+# TODO: actually summoned by Positive King
+ShadowList['Secret Bambino'] = PersonaStats(
+  name = 'Secret Bambino',
+  arcana = Arcana.Empress,
+  floor = (4, 7),
+  level = 10,
+  hp = 122,
+  sp = 62,
+  exp = 61,
+  yen = 200,
+  skill = SkillList['Bash'],
+  weak = [ DamageType.Elec ],
+  strong = [],
+  block = [],
+  absorb = [],
+  reflect = [],
+  )
+
+# TODO: special AI
+# It will summon a Secret Bambino and then try to hit party members with Zio. After some turns pass, it will Stand By and then escape the battle. If a Phantom Mage is present in battle, it may instead summon a Bronze Dice shadow.
+ShadowList['Positive King'] = PersonaStats(
+  name = 'Positive King',
+  arcana = Arcana.Emperor,
+  floor = (4, 7),
+  level = 11,
+  hp = 160,
+  sp = 43,
+  exp = 142,
+  yen = 200,
+  # TODO: skill = SkillList['Summon Secret Bambino'],
+  skill = None,
+  weak = [],
+  strong = [],
+  block = [],
+  absorb = [],
+  reflect = [],
+  )
+
+ShadowList['Bronze Dice'] = PersonaStats(
+  name = 'Bronze Dice',
+  arcana = Arcana.Fortune,
+  floor = (4, 7),
+  level = 10,
+  hp = 130,
+  sp = 34,
+  exp = 222,
+  yen = 200,
+  # TODO: skill = SkillList['Last Resort'],
+  skill = None,
+  weak = [ DamageType.Elec ],
+  strong = [ DamageType.Phys ],
+  block = [],
+  absorb = [],
+  reflect = [],
+  )
+
 """
 ShadowList[''] = PersonaStats(
   name = '',

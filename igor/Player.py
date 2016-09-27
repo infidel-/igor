@@ -56,9 +56,9 @@ class Player:
 
     # new level
     self.level = newlevel
-    self.hp = LevelHP[self.level] 
+    self.hp = LevelHP[self.level]
     self.maxHP = self.hp
-    self.sp = LevelSP[self.level] 
+    self.sp = LevelSP[self.level]
     self.maxSP = self.sp
     self.say('Leveru Uppu! You have gained level ' + str(self.level) + '!')
 

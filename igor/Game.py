@@ -102,7 +102,8 @@ class Game:
         player.say('There is a shadow here.')
 
         cmds.append('attack')
-        if (player.dungeon.level != 10 or player.dungeon.room != 4):
+        if (player.dungeon.level != player.dungeon.maxLevel or
+            player.dungeon.room != 4):
           cmds.append('sneak')
       else:
         if (player.dungeon.room < 4):
@@ -253,7 +254,7 @@ class Game:
       player.say('You sneak around the shadow to the next room.')
     else:
       # cannot sneak past the boss
-      if (player.dungeon.level == 10):
+      if (player.dungeon.level == player.dungeon.maxLevel):
         return
 
       if (rnd >= 30):
@@ -277,7 +278,8 @@ class Game:
       return
 
     # game over
-    if (player.dungeon.level == 10 and player.dungeon.room == 4):
+    if (player.dungeon.level == player.dungeon.maxLevel and
+        player.dungeon.room == 4):
       player.say('You finish the ' + player.dungeon.name + ' dungeon. Thanks for playing!')
       Game.gameOver(player)
       return

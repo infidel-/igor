@@ -4,6 +4,7 @@ import random
 
 class Dungeon:
   level = 1
+  maxLevel = 8
   room = 1
   name = "First"
   shadow = False

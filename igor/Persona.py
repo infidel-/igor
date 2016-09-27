@@ -49,11 +49,32 @@ SkillList['Bash'] = PersonaSkill(
   damageType = DamageType.Phys,
   power = 120,
   )
+SkillList['Agi'] = PersonaSkill(
+  name = 'Agi',
+  cost = 4,
+  costType = 'SP',
+  damageType = DamageType.Fire,
+  power = 80,
+  )
 SkillList['Zio'] = PersonaSkill(
   name = 'Zio',
   cost = 4,
   costType = 'SP',
   damageType = DamageType.Elec,
+  power = 80,
+  )
+SkillList['Bufu'] = PersonaSkill(
+  name = 'Bufu',
+  cost = 4,
+  costType = 'SP',
+  damageType = DamageType.Ice,
+  power = 80,
+  )
+SkillList['Garu'] = PersonaSkill(
+  name = 'Garu',
+  cost = 4,
+  costType = 'SP',
+  damageType = DamageType.Wind,
   power = 80,
   )
 

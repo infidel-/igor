@@ -1,19 +1,14 @@
 # STAGE 1
 =========
 
-+ attack
-  attack power (weapon)
-+ skill
-  remove skill command when not enough hp or sp
-shadow skills for sp
-proper shadow attack
+attack power (weapon)
+remove skill command when not enough hp or sp
+shadow skills
+shadow attack power
 shadow power skill from level
-
-shadow hp from its base level (+ bonus from actual level)
 tougher overleveled shadows?
 interactive python test
 
-Damage types: melee, shooting, magic
 different starting personas
 Fool-Orpheus
 Lovers-Pixie
@@ -26,11 +21,14 @@ boss
 game over - show xp, level and max dungeon level
 disable admin commands in production!
 admin commands - try to make them available to admins
+admin info - games started, games won, player records
 ? absorb, reflect damage
+some shadow skills changed
 
 # STAGE 2
 =========
 
+shadow skills for sp?
 items - usables + weapon
 analyze - persona descriptions
 on X hints auto-analyze
@@ -77,7 +75,7 @@ crowdsource persona hints and descriptions
 secret boss:
 Hetto-Firudo
 "Foh hum za be-ru tor-ru-zo!"
-"E-ehk-sit-to rai-to! E-en-tor-ru nai-to!"
+"Ehk-kuh-sit-to rai-to! Ehn-tor-ru nai-to!"
 
 # DOCUMENTATION
 ===============
