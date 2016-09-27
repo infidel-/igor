@@ -1,7 +1,17 @@
 # STAGE 1
 =========
 
-interactive python test
+boss
+game over - show xp, level and max dungeon level
+disable admin commands in production!
+admin commands - try to make them available to admins
+admin info - games started, games won, player records, number of players
+  that got to level X?
+? absorb, reflect damage
+some shadow skills changed
+
+# STAGE 2
+=========
 
 different starting personas
 Fool-Orpheus
@@ -10,17 +20,6 @@ Magician-Nekomata
 Justice-Angel
 Priestess-Apsaras
 Hermit-Yomotsu Shikome
-
-boss
-game over - show xp, level and max dungeon level
-disable admin commands in production!
-admin commands - try to make them available to admins
-admin info - games started, games won, player records
-? absorb, reflect damage
-some shadow skills changed
-
-# STAGE 2
-=========
 
 shadow skills for sp?
 items - usables + weapon

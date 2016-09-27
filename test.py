@@ -185,38 +185,46 @@ msg_battle = [
   "info",
   ]
 
+def message(bot, m):
+  msg = ";" + m
+  match = None
+
+  # get command
+  command = m
+  if (m.find(' ') > 0):
+    arr = m.split()
+    command = arr[0]
+
+  regexp = sopel.tools.get_command_regexp(".", command)
+  match = regexp.match(msg)
+  assert match, "Example did not match any command."
+
+  sender = "#channel"
+  hostmask = "%s!%s@%s " % (bot.nick, "UserName", "example.com")
+  full_message = ':{} PRIVMSG {} :{}'.format(hostmask, sender, msg)
+
+  pretrigger = sopel.trigger.PreTrigger(bot.nick, full_message)
+  trigger = sopel.trigger.Trigger(bot.config, pretrigger, match)
+
+  module = sys.modules['igor']
+  if hasattr(module, 'setup'):
+      module.setup(bot)
+
+  wrapper = MockSopelWrapper(bot, trigger)
+  module.command(wrapper, trigger)
+
 
 #msgs = msg1
 msgs = msg_battle
 
-for m in msgs:
-    msg = ";" + m
-    match = None
+play = (len(sys.argv) > 1 and sys.argv[1] == '-i')
 
-    # get command
-    command = m
-    if (m.find(' ') > 0):
-      arr = m.split()
-      command = arr[0]
-
-    regexp = sopel.tools.get_command_regexp(".", command)
-    match = regexp.match(msg)
-    assert match, "Example did not match any command."
-
-    sender = "#channel"
-    hostmask = "%s!%s@%s " % (bot.nick, "UserName", "example.com")
-    full_message = ':{} PRIVMSG {} :{}'.format(hostmask, sender, msg)
-    print("\n> " + msg)
-
-    pretrigger = sopel.trigger.PreTrigger(bot.nick, full_message)
-    trigger = sopel.trigger.Trigger(bot.config, pretrigger, match)
-
-    module = sys.modules['igor']
-    if hasattr(module, 'setup'):
-        module.setup(bot)
-
-    wrapper = MockSopelWrapper(bot, trigger)
-#    method = getattr(module, command)
-#    method(wrapper, trigger)
-    module.command(wrapper, trigger)
+if (play):
+  while True:
+    m = input('> ')
+    message(bot, m)
+else:
+  for m in msgs:
+    print("\n> " + m)
+    message(bot, m)
 

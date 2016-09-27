@@ -50,8 +50,10 @@ class Battle:
     if (not self.shadow.isKnown):
       cmds.append('analyze')
     cmds.append('retreat')
-    s = 'You are in a battle with ' + self.shadow.name + '.'
-    s += ' You have ' + str(self.player.hp) + '/' + str(self.player.maxHP) + \
+    s = 'You are in a battle with ' + self.shadow.name
+    if (self.shadow.isKnown):
+      s += ' (' + str(self.shadow.hp) + '/' + str(self.shadow.maxHP) + ')'
+    s += '. You have ' + str(self.player.hp) + '/' + str(self.player.maxHP) + \
       ' HP, ' + str(self.player.sp) + '/' + str(self.player.maxSP) + ' SP.'
     s += ' Your persona is ' + self.player.persona.name + ' ' + \
       getPersonaInfo(self.player.persona) + ' (' + \
