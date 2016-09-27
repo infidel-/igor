@@ -174,6 +174,19 @@ msg_battle = [
   "dungeon",
 
   "admin battle",
+  "analyze",
+  "admin kill",
+  "admin dungeon 3",
+  "admin battle",
+  "analyze",
+  ]
+msg_battle2 = [
+  "start",
+  "info",
+  "dungeon",
+
+  "admin battle",
+  "analyze",
   "admin kill",
   "admin dungeon 2",
 
@@ -220,6 +233,8 @@ msgs = msg_battle
 play = (len(sys.argv) > 1 and sys.argv[1] == '-i')
 
 if (play):
+  message(bot, 'start')
+  message(bot, 'dungeon')
   while True:
     m = input('> ')
     message(bot, m)

@@ -27,8 +27,8 @@ class Shadow:
     self.atk = ShadowAtk[self.level]
 
     # analyzed or not
-    isKnown = (self.name in self.player.shadowsKnown)
-    if (not isKnown):
+    self.isKnown = (self.name in self.player.shadowsKnown)
+    if (not self.isKnown):
       self.name = "the shadow"
 
 
@@ -36,7 +36,7 @@ class Shadow:
 
 global SkillList
 
-ShadowAtk = [ 0, 40, 50, 60, 70, 75, 80, 90, 100, 110, 120 ]
+ShadowAtk = [ 0, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65 ]
 ShadowCache = dict()
 ShadowList = dict()
 

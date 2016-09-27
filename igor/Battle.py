@@ -52,11 +52,11 @@ class Battle:
     cmds.append('retreat')
     s = 'You are in a battle with ' + self.shadow.name
     if (self.shadow.isKnown):
-      s += ' (' + str(self.shadow.hp) + '/' + str(self.shadow.maxHP) + ')'
+      s += ' (HP ' + str(self.shadow.hp) + '/' + str(self.shadow.maxHP) + ')'
     s += '. You have ' + str(self.player.hp) + '/' + str(self.player.maxHP) + \
       ' HP, ' + str(self.player.sp) + '/' + str(self.player.maxSP) + ' SP.'
     s += ' Your persona is ' + self.player.persona.name + ' ' + \
-      getPersonaInfo(self.player.persona) + ' (' + \
+      getPersonaInfo(self.player.persona, False) + ' (' + \
       self.player.persona.skill.getNameAndCost(self.player) + ').'
     self.player.say(s)
 
@@ -72,7 +72,7 @@ class Battle:
       return 0
 
     rnd = 100.0 + random.randint(-5, 5)
-    damage = 5 * (power / 100.0) * (rnd / 100.0)
+    damage = 20 * (power / 100.0) * (rnd / 100.0)
     if (damageType in target.weak):
       damage *= 1.5
     elif (damageType in target.strong):
@@ -141,7 +141,7 @@ class Battle:
     self.player.shadowsKnown.append(self.shadow.trueName)
 
     s = 'This shadow is called ' + self.shadow.name + '.'
-    s += ' ' + getPersonaInfo(self.shadow)
+    s += ' ' + getPersonaInfo(self.shadow, True)
     self.player.say(s)
 
     # shadow response
@@ -211,6 +211,8 @@ class Battle:
     self.player.say('You lose the battle.')
     self.player.state = PlayerState.IDLE
     self.player.location = Location.VELVET_ROOM
+    self.player.hp = self.player.maxHP
+    self.player.sp = self.player.maxSP
 
     Game.look(self.player)
 

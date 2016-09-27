@@ -14,8 +14,11 @@ class Persona:
 
 
 # get info string
-def getPersonaInfo(persona):
+def getPersonaInfo(persona, isShadow):
   s = '[Lv ' + str(persona.level)
+  if (isShadow):
+    s += ', ATK ' + str(persona.atk) + \
+      ', HP ' + str(persona.maxHP)
   if (len(persona.weak) > 0):
     s += ', Weak:'
     for t in persona.weak:

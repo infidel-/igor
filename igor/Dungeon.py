@@ -15,7 +15,7 @@ class Dungeon:
 
 # init new room
   def initRoom(self):
-    if (random.randint(0, 100) < 70):
+    if (random.randint(0, 100) < 80):
       self.shadow = True
 
 

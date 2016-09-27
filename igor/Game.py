@@ -111,7 +111,7 @@ class Game:
         else:
           cmds.append('up')
 
-      if (not (player.dungeon.level == 1 and player.dungeon.room == 1)):
+      if (not player.dungeon.room == 1):
         cmds.append('back')
 
     # list commands

@@ -1,17 +1,21 @@
 # STAGE 1
 =========
 
+teleporters - return to velvet room for HP/SP restore on L5/L10,
+  can return back
+. - repeat last command
 boss
 game over - show xp, level and max dungeon level
 disable admin commands in production!
 admin commands - try to make them available to admins
 admin info - games started, games won, player records, number of players
   that got to level X?
-? absorb, reflect damage
-some shadow skills changed
 
 # STAGE 2
 =========
+
+? absorb, reflect damage
+some shadow skills changed
 
 different starting personas
 Fool-Orpheus

@@ -74,7 +74,7 @@ class Player:
       ', SP ' + str(self.sp) + '/' + str(self.maxSP) + '.'
 #      ', LV ' + str(self.persona.level) + \
     s += ' Persona: ' + self.persona.name + ' ' + \
-      getPersonaInfo(self.persona) + \
+      getPersonaInfo(self.persona, False) + \
       ' (' + self.persona.skill.getNameAndCost(self) + ').'
     self.say(s)
 
