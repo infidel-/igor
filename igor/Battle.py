@@ -179,7 +179,7 @@ class Battle:
       # damage to player
       damage = self.damageFormula(self.shadow.atk, DamageType.Phys,
         self.player.persona)
-      msg = self.shadow.name + ' hits you for ' + \
+      msg = self.shadow.name.capitalize() + ' hits you for ' + \
         str(damage) + ' damage.'
 
     self.player.hp -= damage

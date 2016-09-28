@@ -15,7 +15,8 @@ class Dungeon:
 
 # init new room
   def initRoom(self):
-    if (random.randint(0, 100) < 80):
+    self.shadow = False
+    if (random.randint(0, 100) < 80 and self.level < self.maxLevel):
       self.shadow = True
 
 
