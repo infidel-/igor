@@ -7,6 +7,7 @@ from .Battle import Battle
 from .Persona import *
 
 class Player:
+  lastCommand = None
   location = Location.VELVET_ROOM
   name = None
   hp = 0

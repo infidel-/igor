@@ -8,7 +8,6 @@ version command
   write about version command in help and channel description
 teleporters - return to velvet room for HP/SP restore on L5/L10,
   can return back
-. - repeat last command
 boss
 game over - show xp, level and max dungeon level
 disable admin commands in production!

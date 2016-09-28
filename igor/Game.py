@@ -10,6 +10,11 @@ class Game:
   def command(player, cmds):
     cmd = cmds[0]
 
+    # ANY: repeat last command
+    if (cmd == '.' and player.lastCommand != None):
+      cmds = player.lastCommand
+      cmd = cmds[0]
+
     # ANY: help
     if (cmd in [ 'help', 'h' ]):
       player.say(';help - show this list, ;look - look around (shows a list of commands), ;start - (re)start a game, ;info - player stats and info')
@@ -65,6 +70,10 @@ class Game:
     # hehe
     elif (cmd == 'xyzzy'):
       player.say('Something happens.')
+
+    # save last command
+    if (cmd != '.'):
+      player.lastCommand = cmds
 
 
 # new player intro
