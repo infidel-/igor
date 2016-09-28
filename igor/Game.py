@@ -262,6 +262,7 @@ class Game:
         player.battle.start()
         return
 
+      player.dungeon.up()
       player.say('You sneak around the shadow up the stairs.')
 
     Game.look(player)

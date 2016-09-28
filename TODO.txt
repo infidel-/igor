@@ -2,7 +2,6 @@
 =========
 
 die, dungeon -> goes to last room
-sneak in room 4 does nothing
 version command
   upload script changes VERSION file to have version and changelog, then uploads
   at start module loads VERSION file
