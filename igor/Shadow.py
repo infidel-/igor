@@ -10,6 +10,7 @@ class Shadow:
   atk = 0
   isKnown = False
   trueName = None
+  knockdown = 0
 
   def __init__(self, player):
     self.player = player

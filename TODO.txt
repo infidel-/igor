@@ -1,6 +1,15 @@
 # STAGE 1
 =========
 
+multiple skills
+gain other personas
+switch persona
+basic personas with 4 damage types + fear
+their skills + rakunda, rakukaja
+exploit counter
+
+
+check if exp needs to be / 3
 die, dungeon -> goes to last room
 version command
   upload script changes VERSION file to have version and changelog, then uploads
@@ -81,6 +90,125 @@ Hetto-Firudo
 # DOCUMENTATION
 ===============
 
+SLIME
+Skill Cost  Effect  Level
+Bash  6% HP Deals light Phys damage to 1 foe. Innate
+Evil Touch  5 SP  Instills Fear in 1 foe (40% chance).  Innate
+Tarunda 12 SP Decreases 1 foe's Attack for 3 turns. 3
+Red Wall  18 SP Add Fire resistance to 1 ally (for 3 turns).  4
+Fear Boost  Passive Increases odds of inflicting Fear (1.5x). 5
+Resist Physical Passive Reduces damage from Phys attacks. 7
+
+IZANAGI
+Zio 4 SP  Deals light Elec damage to 1 foe. Innate
+Cleave  5% HP Deals light Phys damage to 1 foe. Innate
+Rakukaja  12 SP Increases 1 ally's Defense for 3 turns. Innate
+Rakunda 12 SP Decreases 1 foe's Defense for 3 turns.  3
+Tarukaja  12 SP Increases 1 ally's Attack for 3 turns.  5
+
+Rakukaja (Raises one ally's physical/magical defensive strength for three turns.)
+Rakunda (Reduces one enemy's physical and magic defensive power for three turns.)
+Tarukaja (Raises one ally's physical/magical offensive strength for three turns.)
+
+
+MECHANICS
+- Resistances: Null - Strong - Normal - Weak - Critical Weak
+- Persona change is instant for the three main personas.
+- Each skill against weak knocks down and marks it as exploited (+1 Exploit counter)
+  So Zio, then again Zio against Weak Elec will only count as +1 exploit counter with two knockdowns
+- Fear skills also count as a knock down (40% base chance)
+- Getting up from knockdown resets all exploits
+- Attack/Skill with 2 exploits will treat Strong as Weak (for the next attack?)
+- Attack/Skill with 3 exploits will treat Strong as Critical Weak (for the next attack?)
+
+? Tarukaja - +1 Exploit on next successful attack (if damage > 0)
+- Rakunda - -1 to all affinities for 3 turns
+  (Absorb -> Strong, Strong -> Weak, Null -> Strong,
+  Strong -> Normal, Normal -> Weak, Weak stays Weak)
+? Rakukaja - +1 affinity for player for 3 turns up to Strong
+
+
+CHAINS
+VS Hablerie (Strong - Fire, Weak - Ice, Elec):
+  Skill - Attack
+
+[1 persona]
+Zio -> Down, 1 Exploit
+Zio -> Down, 1 Exploit
+Zio -> Down, 1 Exploit
+
+[2 persona]
+1 Zio -> Down, 1 Exploit
+2 Rakunda -> Up, 0 Exploit,
+  Normal - Fire, Weak - Phys, Ice, Elec, Wind
+3 (1 Rakunda) Zio -> Down, 1 Exploit
+4 (2 Rakunda) Attack -> Down, 2 Exploit
+5 (3 Rakunda) Attack -> Down, 2 Exploit
+  Rakunda wears off
+  Strong - Fire, Weak - Ice, Elec
+  Next Fire now treats Strong as Weak instead
+6 Agi
+
+[min 4 personas]
+1 Zio -> Down, 1 Exploit ->
+2 Bufu -> Double Down, 2 Exploit ->
+3 Evil Touch -> Triple Down, 3 Exploit (Max) ->
+  Next Agi now treats Strong as Critical Weak instead
+4 Agi
+
+[min 4 personas - Izanagi (Zio, Rakunda), ]
+1 Zio/Bufu -> Down, 1 Exploit ->
+2 Rakunda -> Up, 0 Exploit,
+  Normal - Fire, Weak - Phys, Ice, Elec, Wind
+3 (1 Rakunda) Phys/Ice/Elec/Wind/Fear -> Down, 1 Exploit
+4 (2 Rakunda) Phys/Ice/Elec/Wind/Fear -> Down, 2 Exploit
+5 (3 Rakunda) Phys/Ice/Elec/Wind/Fear -> Down, 3 Exploit (Max)
+  Rakunda wears off
+  Strong - Fire, Weak - Ice, Elec
+  Next Fire attack will count as Critical Weak
+6 Agi
+
+
+VS Calm Pesce (Null - Ice, Strong - Phys, Weak - Wind):
+  Skill - Attack
+[Need min 3 personas - Izanagi (Zio, Rakunda), Garu/Agi, Slime (Evil Touch)]
+1 Garu -> Down, 1 Exploit ->
+2 Rakunda -> Up, 0 Exploit,
+  Strong - Ice, Normal - Phys, Weak - Fire, Elec, Wind
+3 (1 Rakunda) Agi/Garu/Zio/Evil Touch -> Down, 1 Exploit
+4 (2 Rakunda) Agi/Garu/Zio/Evil Touch -> Down, 2 Exploit
+5 (3 Rakunda) Agi/Garu/Zio/Evil Touch -> Down, 3 Exploit (Max)
+  Rakunda wears off
+  Null - Ice, Strong - Phys, Weak - Wind
+  Next Phys attack will counts as Critical Weak
+6 Attack/Bash/Cleave etc.
+
+
+VS Trance Twins (Null - Ice, Elec, Wind, Strong - Phys)
+  Skill - Bufu
+[min 3 personas both ways]
+1 Rakunda
+  One return hit
+  Strong - Ice, Elec, Wind, Normal - Phys, Weak - Fire
+2 (1 Rakunda) Fire, 1 Exploit, Down
+3 (2 Rakunda) Fear, 2 Exploit, Down
+  Next Ice/Elec/Wind counts as Weak
+4 (3 Rakunda) Ice/Elec/Wind - counts as Weak  Down
+  Rakunda wears off
+  Null - Ice, Elec, Wind, Strong - Phys
+5 Attack/Phys - counts as Weak, Down
+OR
+4 (3 Rakunda) Fear, 2 Exploit, Down
+  Rakunda wears off
+  Null - Ice, Elec, Wind, Strong - Phys
+5 Attack/Phys - counts as Weak, Down
+
+
+BOSSES
+- if the player gets knocked down, shadow gets a free attack and he gets up after that
+- bosses are not knocked down on attacks against Weak
+- work on counters (Rakukaja (+1 Affinity up to Strong), 3x attack against Strong/Null builds counter-exploit?)
+
  ______________________________________________________________________
 |                                                                      |
 | + Izanagi +                                                  [00P01] |
@@ -104,6 +232,8 @@ Hetto-Firudo
 | created the Ouyashima from chaos, then gave birth to countless       |
 | children and laid the foundation of soil and nature.                 |
  ----------------------------------------------------------------------
+
+
  7a. Damage                                                             [007a0]
 
 

@@ -198,6 +198,22 @@ msg_battle2 = [
   "info",
   ]
 
+msg_battle3 = [
+  "start",
+  "dungeon",
+
+  "admin battle",
+  "analyze",
+  "attack",
+  "skill",
+  "attack",
+  "skill",
+  ]
+
+#msgs = msg1
+msgs = msg_battle3
+
+
 def message(bot, m):
   msg = ";" + m
   match = None
@@ -226,9 +242,6 @@ def message(bot, m):
   wrapper = MockSopelWrapper(bot, trigger)
   module.command(wrapper, trigger)
 
-
-#msgs = msg1
-msgs = msg_battle
 
 play = (len(sys.argv) > 1 and sys.argv[1] == '-i')
 

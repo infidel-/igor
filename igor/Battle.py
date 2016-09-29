@@ -67,27 +67,57 @@ class Battle:
 
 # damage formula
   def damageFormula(self, power, damageType, target):
+    ret = {
+      'damage': 0,
+      'knockdown': False,
+      'block': False,
+      'weak': False,
+      'strong': False
+      }
+
     # block damage
     if (damageType in target.block):
-      return 0
+      ret['block'] = True
+      return ret
 
     rnd = 100.0 + random.randint(-5, 5)
     damage = 20 * (power / 100.0) * (rnd / 100.0)
     if (damageType in target.weak):
       damage *= 1.5
+      ret['knockdown'] = True
+      ret['weak'] = True
     elif (damageType in target.strong):
       damage *= 0.5
+      ret['strong'] = True
+    ret['damage'] = int(damage)
 
-    return int(damage)
+    return ret
+
+
+  def addAttackMessageMods(self, msg, ret):
+    if (ret['block']):
+      msg += ' Block!'
+    if (ret['weak']):
+      msg += ' Weak!'
+    if (ret['strong']):
+      msg += ' Strong!'
+    if (ret['knockdown']):
+      msg += ' Knockdown!'
+
+    return msg
 
 
 # attack shadow
   def attack(self):
     # damage to shadow
-    damage = self.damageFormula(self.player.atk, DamageType.Phys, self.shadow)
-    self.shadow.hp -= damage
-    self.player.say('You hit ' + self.shadow.name + ' for ' + str(damage) +
-      ' damage.')
+    ret = self.damageFormula(self.player.atk, DamageType.Phys, self.shadow)
+    self.shadow.hp -= ret['damage']
+    if (ret['knockdown']):
+      self.shadow.knockdown = 1
+    msg = 'You hit ' + self.shadow.name + ' for ' + str(ret['damage']) + \
+      ' damage.'
+    msg = self.addAttackMessageMods(msg, ret)
+    self.player.say(msg)
 
     # shadow is dead, win battle
     if (self.shadow.hp <= 0):
@@ -116,10 +146,14 @@ class Battle:
       self.player.sp -= cost
 
     # calc and apply damage
-    damage = self.damageFormula(skill.power, skill.damageType, self.shadow)
-    self.shadow.hp -= damage
-    self.player.say('You cast ' + skill.name + ' on ' + self.shadow.name + \
-      ' for ' + str(damage) + ' damage.')
+    ret = self.damageFormula(skill.power, skill.damageType, self.shadow)
+    self.shadow.hp -= ret['damage']
+    if (ret['knockdown']):
+      self.shadow.knockdown = 1
+    msg = 'You cast ' + skill.name + ' on ' + self.shadow.name + \
+      ' for ' + str(ret['damage']) + ' damage.'
+    msg = self.addAttackMessageMods(msg, ret)
+    self.player.say(msg)
 
     # shadow is dead, win battle
     if (self.shadow.hp <= 0):
@@ -162,27 +196,46 @@ class Battle:
 
 # shadow action
   def shadowAction(self):
+    # knockdown
+    if (self.shadow.knockdown == 1):
+      self.shadow.knockdown = 2
+      self.player.say(self.shadow.name.capitalize() + ' is trying to get up!')
+
+      # look around
+      Game.look(self.player)
+      return
+
+    elif (self.shadow.knockdown == 2):
+      self.shadow.knockdown = 0
+      self.player.say(self.shadow.name.capitalize() + ' gets up!')
+
+      # look around
+      Game.look(self.player)
+      return
+
+
     # randomly use skill
     rnd = random.randint(0, 100)
     damage = 0
     msg = ''
+    ret = None
     if (self.shadow.skill != None and rnd < 30):
       skill = self.shadow.skill
 
       # calc and apply damage
-      damage = self.damageFormula(skill.power, skill.damageType,
+      ret = self.damageFormula(skill.power, skill.damageType,
         self.player.persona)
-      self.shadow.hp -= damage
       msg = self.shadow.name.capitalize() + ' casts ' + skill.name + \
-        ' on you for ' + str(damage) + ' damage.'
+        ' on you for ' + str(ret['damage']) + ' damage.'
     else:
       # damage to player
-      damage = self.damageFormula(self.shadow.atk, DamageType.Phys,
+      ret = self.damageFormula(self.shadow.atk, DamageType.Phys,
         self.player.persona)
       msg = self.shadow.name.capitalize() + ' hits you for ' + \
-        str(damage) + ' damage.'
+        str(ret['damage']) + ' damage.'
 
-    self.player.hp -= damage
+    self.player.hp -= ret['damage']
+    msg = self.addAttackMessageMods(msg, ret)
     self.player.say(msg)
 
     # player is dead, lose battle
