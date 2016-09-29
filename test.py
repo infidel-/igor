@@ -206,6 +206,11 @@ msg_battle3 = [
   "analyze",
   "skill 3",
   "analyze",
+  "attack",
+  "attack",
+  "analyze",
+  "attack",
+  "analyze",
   ]
 
 #msgs = msg1

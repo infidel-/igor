@@ -18,6 +18,21 @@ class Shadow:
     self.player = player
     self.buffs = dict()
 
+# end turn, -1 turns and check for buffs timeout
+  def turn(self):
+    calc = False
+    for s in self.buffs.copy():
+      self.buffs[s] -= 1
+      if (self.buffs[s] > 0):
+        continue
+
+      self.player.say(s + ' wears off.')
+      del self.buffs[s]
+      calc = True
+
+    if (calc):
+      self.recalc()
+
 
 # recalc all stats
   def recalc(self):

@@ -162,8 +162,8 @@ class Battle:
 
     # support skill - buff self
     elif (skill.type == SkillType.SupportEnemy):
-      # add to buffs list
-      self.shadow.buffs[skill.name] = skill.turns
+      # add to buffs list (+1 for this turn)
+      self.shadow.buffs[skill.name] = skill.turns + 1
 
       # recalc stats
       self.shadow.recalc()
@@ -178,7 +178,9 @@ class Battle:
 # try to analyze
   def analyze(self):
     # shadow not yet known
+    doTurn = False
     if (not self.shadow.isKnown):
+      doTurn = True
       self.shadow.isKnown = True
       self.shadow.name = self.shadow.trueName
       self.player.shadowsKnown.append(self.shadow.trueName)
@@ -188,7 +190,8 @@ class Battle:
     self.player.say(s)
 
     # shadow response
-    self.shadowAction()
+    if (doTurn):
+      self.shadowAction()
 
 
 # try to retreat
@@ -210,6 +213,9 @@ class Battle:
       self.shadow.knockdown = 2
       self.player.say(self.shadow.name.capitalize() + ' is trying to get up!')
 
+      # time passage
+      self.shadow.turn()
+
       # look around
       Game.look(self.player)
       return
@@ -217,6 +223,9 @@ class Battle:
     elif (self.shadow.knockdown == 2):
       self.shadow.knockdown = 0
       self.player.say(self.shadow.name.capitalize() + ' gets up!')
+
+      # time passage
+      self.shadow.turn()
 
       # look around
       Game.look(self.player)
@@ -250,6 +259,9 @@ class Battle:
     if (self.player.hp <= 0):
       self.finishLose()
       return
+
+    # time passage
+    self.shadow.turn()
 
     # look around
     Game.look(self.player)
