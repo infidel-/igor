@@ -45,7 +45,7 @@ class Game:
 
     # BATTLE: use persona skill
     elif (cmd in [ 'skill', 'sk' ]):
-      Game.skill(player)
+      Game.skill(player, cmds)
 
     # BATTLE: retreat
     elif (cmd in [ 'retreat', 'r' ]):
@@ -177,11 +177,21 @@ class Game:
 
 
 # BATTLE: use persona skill
-  def skill(player):
+  def skill(player, cmds):
     if (player.state != PlayerState.BATTLE):
       return
 
-    player.battle.skill()
+    if (len(cmds) < 2):
+      player.say('Usage: ;skill <skill number>')
+      return
+
+    index = -1
+    try:
+      index = int(cmds[1])
+    except ValueError:
+      return
+
+    player.battle.skill(int(cmds[1]) - 1)
 
 
 # BATTLE: analyze

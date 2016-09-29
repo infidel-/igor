@@ -39,16 +39,8 @@ class Battle:
   def look(self):
     cmds = []
     cmds.append('attack')
-
-    # show skill action only if enough HP/SP
-    skill = self.player.persona.skill
-    cost = skill.getCost(self.player)
-    val = self.player.hp if skill.costType == 'HP' else self.player.sp
-    if (cost < val):
-      cmds.append('skill')
-
-    if (not self.shadow.isKnown):
-      cmds.append('analyze')
+    cmds.append('skill')
+    cmds.append('analyze')
     cmds.append('retreat')
     s = 'You are in a battle with ' + self.shadow.name
     if (self.shadow.isKnown):
@@ -56,8 +48,7 @@ class Battle:
     s += '. You have ' + str(self.player.hp) + '/' + str(self.player.maxHP) + \
       ' HP, ' + str(self.player.sp) + '/' + str(self.player.maxSP) + ' SP.'
     s += ' Your persona is ' + self.player.persona.name + ' ' + \
-      getPersonaInfo(self.player.persona, False) + ' (' + \
-      self.player.persona.skill.getNameAndCost(self.player) + ').'
+      getPersonaInfo(self.player, self.player.persona, False) + '.'
     self.player.say(s)
 
     # list commands
@@ -74,19 +65,22 @@ class Battle:
       'weak': False,
       'strong': False
       }
+    aff = DamageAffinity.Normal
+    if (damageType in target.affinity):
+      aff = target.affinity[damageType]
 
     # block damage
-    if (damageType in target.block):
+    if (aff == DamageAffinity.Block):
       ret['block'] = True
       return ret
 
     rnd = 100.0 + random.randint(-5, 5)
     damage = 20 * (power / 100.0) * (rnd / 100.0)
-    if (damageType in target.weak):
+    if (aff == DamageAffinity.Weak):
       damage *= 1.5
       ret['knockdown'] = True
       ret['weak'] = True
-    elif (damageType in target.strong):
+    elif (aff == DamageAffinity.Strong):
       damage *= 0.5
       ret['strong'] = True
     ret['damage'] = int(damage)
@@ -129,14 +123,18 @@ class Battle:
 
 
 # use skill
-  def skill(self):
-    skill = self.player.persona.skill
+  def skill(self, index):
+    # check for cost
+    if (index >= len(self.player.persona.skills)):
+      return
+    skill = self.player.persona.skills[index]
     cost = skill.getCost(self.player)
     costType = skill.costType
     val = self.player.hp if costType == 'HP' else self.player.sp
 
     # not enough HP/SP
     if (cost > val):
+      self.player.say('Not enough ' + costType + '.')
       return
 
     # spend cost
@@ -145,20 +143,33 @@ class Battle:
     else:
       self.player.sp -= cost
 
-    # calc and apply damage
-    ret = self.damageFormula(skill.power, skill.damageType, self.shadow)
-    self.shadow.hp -= ret['damage']
-    if (ret['knockdown']):
-      self.shadow.knockdown = 1
-    msg = 'You cast ' + skill.name + ' on ' + self.shadow.name + \
-      ' for ' + str(ret['damage']) + ' damage.'
-    msg = self.addAttackMessageMods(msg, ret)
-    self.player.say(msg)
+    # attack skill - apply damage to enemy
+    if (skill.type == SkillType.Attack):
+      # calc and apply damage
+      ret = self.damageFormula(skill.power, skill.damageType, self.shadow)
+      self.shadow.hp -= ret['damage']
+      if (ret['knockdown']):
+        self.shadow.knockdown = 1
+      msg = 'You cast ' + skill.name + ' on ' + self.shadow.name + \
+        ' for ' + str(ret['damage']) + ' damage.'
+      msg = self.addAttackMessageMods(msg, ret)
+      self.player.say(msg)
 
-    # shadow is dead, win battle
-    if (self.shadow.hp <= 0):
-      self.finishWin()
-      return
+      # shadow is dead, win battle
+      if (self.shadow.hp <= 0):
+        self.finishWin()
+        return
+
+    # support skill - buff self
+    elif (skill.type == SkillType.SupportEnemy):
+      # add to buffs list
+      self.shadow.buffs[skill.name] = skill.turns
+
+      # recalc stats
+      self.shadow.recalc()
+
+      msg = 'You cast ' + skill.name + ' on ' + self.shadow.name + '.'
+      self.player.say(msg)
 
     # shadow response
     self.shadowAction()
@@ -166,16 +177,14 @@ class Battle:
 
 # try to analyze
   def analyze(self):
-    # shadow is already known
-    if (self.shadow.isKnown):
-      return
-
-    self.shadow.isKnown = True
-    self.shadow.name = self.shadow.trueName
-    self.player.shadowsKnown.append(self.shadow.trueName)
+    # shadow not yet known
+    if (not self.shadow.isKnown):
+      self.shadow.isKnown = True
+      self.shadow.name = self.shadow.trueName
+      self.player.shadowsKnown.append(self.shadow.trueName)
 
     s = 'This shadow is called ' + self.shadow.name + '.'
-    s += ' ' + getPersonaInfo(self.shadow, True)
+    s += ' ' + getPersonaInfo(self.shadow, self.shadow, True)
     self.player.say(s)
 
     # shadow response
@@ -213,14 +222,13 @@ class Battle:
       Game.look(self.player)
       return
 
-
     # randomly use skill
     rnd = random.randint(0, 100)
     damage = 0
     msg = ''
     ret = None
-    if (self.shadow.skill != None and rnd < 30):
-      skill = self.shadow.skill
+    if (len(self.shadow.skills) > 0 and rnd < 30):
+      skill = self.shadow.skills[0]
 
       # calc and apply damage
       ret = self.damageFormula(skill.power, skill.damageType,

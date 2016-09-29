@@ -4,6 +4,7 @@ from .Enum import *
 from .Persona import *
 
 class Shadow:
+  source = None
   player = None
   hp = 0
   sp = 0
@@ -11,14 +12,28 @@ class Shadow:
   isKnown = False
   trueName = None
   knockdown = 0
+  buffs = None
 
   def __init__(self, player):
     self.player = player
+    self.buffs = dict()
+
+
+# recalc all stats
+  def recalc(self):
+    # copy stats from object
+    self.__dict__.update(self.source.__dict__)
+
+    # apply buffs and debuffs
+    for k in self.buffs.keys():
+      skill = SkillList[k]
+      skill.apply(self)
 
 
 # reset shadow stats
   def reset(self, o):
     # copy stats from object
+    self.source = o
     self.__dict__.update(o.__dict__)
     self.trueName = self.name
 
@@ -26,6 +41,7 @@ class Shadow:
     self.maxHP = self.hp
     self.maxSP = self.sp
     self.atk = ShadowAtk[self.level]
+    self.buffs.clear()
 
     # analyzed or not
     self.isKnown = (self.name in self.player.shadowsKnown)
@@ -50,12 +66,12 @@ ShadowList['Lying Hablerie'] = PersonaStats(
   sp = 51,
   exp = 24,
   yen = 180,
-  skill = None,
-  weak = [ DamageType.Ice, DamageType.Elec ],
-  strong = [ DamageType.Fire ],
-  block = [],
-  absorb = [],
-  reflect = [],
+  skills = [],
+  affinity = {
+    DamageType.Ice: DamageAffinity.Weak,
+    DamageType.Elec: DamageAffinity.Weak,
+    DamageType.Fire: DamageAffinity.Strong,
+    }
   )
 
 ShadowList['Calm Pesce'] = PersonaStats(
@@ -67,12 +83,12 @@ ShadowList['Calm Pesce'] = PersonaStats(
   sp = 23,
   exp = 38,
   yen = 180,
-  skill = None,
-  weak = [ DamageType.Wind ],
-  strong = [ DamageType.Phys ],
-  block = [ DamageType.Ice ],
-  absorb = [],
-  reflect = [],
+  skills = [],
+  affinity = {
+    DamageType.Wind: DamageAffinity.Weak,
+    DamageType.Phys: DamageAffinity.Strong,
+    DamageType.Ice: DamageAffinity.Block,
+    }
   )
 
 ShadowList['Trance Twins'] = PersonaStats(
@@ -85,12 +101,13 @@ ShadowList['Trance Twins'] = PersonaStats(
   exp = 61,
   yen = 200,
   # TODO: skill = SkillList['Mabufu'],
-  skill = SkillList['Bufu'],
-  weak = [],
-  strong = [ DamageType.Phys ],
-  block = [ DamageType.Ice, DamageType.Elec, DamageType.Wind ],
-  absorb = [],
-  reflect = [],
+  skills = [ SkillList['Bufu'] ],
+  affinity = {
+    DamageType.Phys: DamageAffinity.Strong,
+    DamageType.Wind: DamageAffinity.Block,
+    DamageType.Ice: DamageAffinity.Block,
+    DamageType.Elec: DamageAffinity.Block,
+    }
   )
 
 ShadowList['Black Raven'] = PersonaStats(
@@ -103,12 +120,12 @@ ShadowList['Black Raven'] = PersonaStats(
   exp = 57,
   yen = 180,
   #  TODO: skill = SkillList['Tarukaja'],
-  skill = None,
-  weak = [ DamageType.Elec ],
-  strong = [],
-  block = [ DamageType.Fire, DamageType.Wind ],
-  absorb = [],
-  reflect = [],
+  skills = [],
+  affinity = {
+    DamageType.Elec: DamageAffinity.Weak,
+    DamageType.Wind: DamageAffinity.Block,
+    DamageType.Fire: DamageAffinity.Block,
+    }
   )
 
 ShadowList['Magic Hand'] = PersonaStats(
@@ -120,13 +137,11 @@ ShadowList['Magic Hand'] = PersonaStats(
   sp = 10,
   exp = 77,
   yen = 190,
-  skill = SkillList['Agi'],
+  skills = [ SkillList['Agi'] ],
   # TODO: skill2 = SkillList['Blue Wall'],
-  weak = [ DamageType.Ice ],
-  strong = [],
-  block = [],
-  absorb = [],
-  reflect = [],
+  affinity = {
+    DamageType.Ice: DamageAffinity.Weak,
+    }
   )
 
 # TODO: actually summoned by Positive King
@@ -139,12 +154,10 @@ ShadowList['Secret Bambino'] = PersonaStats(
   sp = 62,
   exp = 61,
   yen = 200,
-  skill = SkillList['Bash'],
-  weak = [ DamageType.Elec ],
-  strong = [],
-  block = [],
-  absorb = [],
-  reflect = [],
+  skills = [ SkillList['Bash'] ],
+  affinity = {
+    DamageType.Elec: DamageAffinity.Weak,
+    }
   )
 
 # TODO: special AI
@@ -159,12 +172,12 @@ ShadowList['Positive King'] = PersonaStats(
   exp = 142,
   yen = 200,
   # TODO: skill = SkillList['Summon Secret Bambino'],
-  skill = None,
-  weak = [],
-  strong = [],
-  block = [],
-  absorb = [],
-  reflect = [],
+  skills = [],
+  affinity = {
+    DamageType.Fire: DamageAffinity.Weak,
+    DamageType.Phys: DamageAffinity.Strong,
+#    DamageType.Elec: DamageAffinity.Reflect,
+    }
   )
 
 ShadowList['Bronze Dice'] = PersonaStats(
@@ -177,12 +190,11 @@ ShadowList['Bronze Dice'] = PersonaStats(
   exp = 222,
   yen = 200,
   # TODO: skill = SkillList['Last Resort'],
-  skill = None,
-  weak = [ DamageType.Elec ],
-  strong = [ DamageType.Phys ],
-  block = [],
-  absorb = [],
-  reflect = [],
+  skills = [],
+  affinity = {
+    DamageType.Elec: DamageAffinity.Weak,
+    DamageType.Phys: DamageAffinity.Strong,
+    }
   )
 
 """
@@ -195,7 +207,7 @@ ShadowList[''] = PersonaStats(
   sp = ,
   exp = ,
   yen = ,
-  skill = None,
+  skills = [],
   weak = [],
   strong = [],
   block = [],

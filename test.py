@@ -204,10 +204,8 @@ msg_battle3 = [
 
   "admin battle",
   "analyze",
-  "attack",
-  "skill",
-  "attack",
-  "skill",
+  "skill 3",
+  "analyze",
   ]
 
 #msgs = msg1

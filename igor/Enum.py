@@ -1,6 +1,6 @@
 # All enums
 
-from enum import Enum
+from enum import Enum, IntEnum
 
 class PlayerState(Enum):
   IDLE = 0
@@ -10,12 +10,24 @@ class Location(Enum):
   VELVET_ROOM = 0
   DUNGEON = 1
 
+class SkillType(Enum):
+  Attack = 0,
+  SupportEnemy = 1,
+
 class DamageType(Enum):
   Phys = 0,
   Fire = 1,
   Ice = 2,
   Elec = 3,
   Wind = 4,
+
+class DamageAffinity(IntEnum):
+  Weak = 0,
+  Normal = 1,
+  Strong = 2,
+  Block = 3,
+  Absorb = 4,
+  Reflect = 5,
 
 class Arcana(Enum):
   Fool = 0,
