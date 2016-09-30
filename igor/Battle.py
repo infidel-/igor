@@ -171,6 +171,19 @@ class Battle:
       msg = 'You cast ' + skill.name + ' on ' + self.shadow.name + '.'
       self.player.say(msg)
 
+    # heal skill
+    elif (skill.type == SkillType.Heal):
+      rnd = 100.0 + random.randint(-5, 5)
+      hp = int(skill.value * (rnd / 100.0))
+
+      self.player.hp += hp
+      if (self.player.hp > self.player.maxHP):
+        self.player.hp = self.player.maxHP
+
+      msg = 'You cast ' + skill.name + ' and heal yourself for ' + str(hp) + \
+        ' HP.'
+      self.player.say(msg)
+
     # shadow response
     self.shadowAction()
 
@@ -275,6 +288,9 @@ class Battle:
     self.player.giveExp(exp)
     self.player.state = PlayerState.IDLE
     self.player.dungeon.shadow = False
+
+    # for now just give out random unknown persona of appropriate level
+    self.player.giveRandomPersona()
 
     Game.look(self.player)
 

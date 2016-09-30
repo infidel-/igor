@@ -1,5 +1,6 @@
 # Player class
 
+import random
 from .Global import *
 from .Enum import *
 from .Dungeon import Dungeon
@@ -33,10 +34,29 @@ class Player:
     self.atk = LevelAtk[1]
     self.name = name
     self.persona = Persona('Izanagi')
-    self.personaKnown = []
+    self.personaKnown = [ 'Izanagi' ]
     self.shadowsKnown = []
     self.dungeon = Dungeon()
     self.battle = Battle(self)
+
+
+# give random persona of appropriate level
+  def giveRandomPersona(self, always = False):
+    # 30% chance
+    if (not always and random.randint(0, 100) > 30):
+      return
+
+    # pick a persona
+    tmp = []
+    for p in PersonaList.values():
+      if (p.level <= self.level and p.name not in self.personaKnown):
+        tmp.append(p.name)
+    if (len(tmp) == 0):
+      return
+
+    id = random.choice(tmp)
+    self.personaKnown.append(id)
+    self.say(id + ' joins you!')
 
 
 # give experience and potentially new level

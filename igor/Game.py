@@ -15,6 +15,13 @@ class Game:
       cmds = player.lastCommand
       cmd = cmds[0]
 
+    # smart S command
+    if (cmd == 's'):
+      if (player.state == PlayerState.BATTLE):
+        cmd = 'skill'
+      elif (player.location == Location.DUNGEON):
+        cmd = 'sneak'
+
     # ANY: help
     if (cmd in [ 'help', 'h' ]):
       player.say(';help - show this list, ;look - look around (shows a list of commands), ;start - (re)start a game, ;info - player stats and info')
@@ -52,7 +59,7 @@ class Game:
       Game.retreat(player)
 
     # DUNGEON: sneak to next room
-    elif (cmd in [ 'sneak', 's' ]):
+    elif (cmd in [ 'sneak' ]):
       Game.sneak(player)
 
     # DUNGEON: go to next room

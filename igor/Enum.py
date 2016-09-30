@@ -13,6 +13,7 @@ class Location(Enum):
 class SkillType(Enum):
   Attack = 0,
   SupportEnemy = 1,
+  Heal = 2,
 
 class DamageType(Enum):
   Phys = 0,

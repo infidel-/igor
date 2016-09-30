@@ -213,8 +213,24 @@ msg_battle3 = [
   "analyze",
   ]
 
+msg_battle4 = [
+  "start",
+  "dungeon",
+
+  "admin battle",
+  "admin kill",
+  "admin battle",
+  "admin kill",
+  "admin battle",
+  "admin kill",
+  "admin battle",
+  "admin kill",
+  "admin battle",
+  "admin kill",
+  ]
+
 #msgs = msg1
-msgs = msg_battle3
+msgs = msg_battle4
 
 
 def message(bot, m):

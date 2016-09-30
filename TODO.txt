@@ -1,7 +1,6 @@
 # STAGE 1
 =========
 
-gain other personas
 switch persona
 basic personas with 4 damage types + fear
 their skills + rakunda, rakukaja
@@ -23,9 +22,12 @@ admin commands - try to make them available to admins
 admin info - games started, games won, player records, number of players
   that got to level X?
 
+
 # STAGE 2
 =========
 
+admin give: personas with spaces in names
+persona levelup + gain skills
 ? absorb, reflect damage
 some shadow skills changed
 
@@ -124,6 +126,10 @@ MECHANICS
 - Rakunda - -1 to all affinities for 3 turns
   (Null -> Strong, Strong -> Normal, Normal -> Weak, Weak stays Weak)
 ? Rakukaja - +1 affinity for player for 3 turns up to Strong
+- Tarunda (Decreases 1 foe's Attack for 3 turns.)
+#Patra   3 SP    Dispels Confusion, Fear, and Rage (1 ally). Innate
+  ? Auto-dispel next C,F,R cast on you.
+
 
 
 CHAINS
