@@ -23,6 +23,7 @@ class Player:
   persona = None
   state = PlayerState.IDLE
   personaKnown = None
+  personaInited = None
   shadowsKnown = None
 
 
@@ -35,9 +36,15 @@ class Player:
     self.name = name
     self.persona = Persona('Izanagi')
     self.personaKnown = [ 'Izanagi' ]
+    self.personaInited = [ self.persona ]
     self.shadowsKnown = []
     self.dungeon = Dungeon()
     self.battle = Battle(self)
+
+# switch persona
+  def switchPersona(self, id):
+    self.persona = self.personaInited[id]
+    self.say('You switch your persona to ' + self.persona.name + '.')
 
 
 # give random persona of appropriate level
@@ -55,7 +62,13 @@ class Player:
       return
 
     id = random.choice(tmp)
+    self.givePersona(id)
+
+
+# give specific persona
+  def givePersona(self, id):
     self.personaKnown.append(id)
+    self.personaInited.append(Persona(id))
     self.say(id + ' joins you!')
 
 

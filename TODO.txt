@@ -1,11 +1,9 @@
 # STAGE 1
 =========
 
-switch persona
-basic personas with 4 damage types + fear
+fear skill
 their skills + rakunda, rakukaja
 exploit counter
-
 
 check if exp needs to be / 3
 die, dungeon -> goes to last room

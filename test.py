@@ -229,8 +229,27 @@ msg_battle4 = [
   "admin kill",
   ]
 
+msg_persona = [
+  "start",
+  "dungeon",
+  "admin level 5",
+  "admin persona give",
+  "admin persona give",
+  "persona",
+  "persona list",
+  "persona switch 2",
+  "info",
+  "persona switch 3",
+  "info",
+  "admin battle",
+  "skill 1",
+  "persona switch 2",
+  "skill 1",
+  "look",
+  ]
+
 #msgs = msg1
-msgs = msg_battle4
+msgs = msg_persona
 
 
 def message(bot, m):

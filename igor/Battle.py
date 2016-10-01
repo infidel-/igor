@@ -41,6 +41,7 @@ class Battle:
     cmds.append('attack')
     cmds.append('skill')
     cmds.append('analyze')
+    cmds.append('persona')
     cmds.append('retreat')
     s = 'You are in a battle with ' + self.shadow.name
     if (self.shadow.isKnown):
@@ -54,6 +55,11 @@ class Battle:
     # list commands
     s = 'You can: ";' + '", ";'.join(cmds) + '".'
     self.player.say(s)
+
+# switch persona
+  def switchPersona(self, id):
+    # TODO: for now, any persona switch is instant
+    self.player.switchPersona(id)
 
 
 # damage formula

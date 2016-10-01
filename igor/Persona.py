@@ -1,4 +1,4 @@
-# Persona stats
+# Persona-related stuff
 
 from .Enum import *
 
@@ -50,6 +50,7 @@ def getPersonaSkills(owner, persona):
       s += ', '
 
   return s
+
 
 # persona stats
 

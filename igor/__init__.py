@@ -56,7 +56,7 @@ def _command(bot, trigger):
         return
 
       cmds.pop(0)
-      Admin.admin(p, cmds)
+      Admin.command(p, cmds)
 
     # any other command
     else:

@@ -4,6 +4,7 @@ import random
 from .Global import *
 from .Enum import *
 from .Persona import *
+from .PersonaCommand import *
 
 class Game:
 
@@ -25,7 +26,13 @@ class Game:
 
     # ANY: help
     if (cmd in [ 'help', 'h' ]):
-      player.say(';help - show this list, ;look - look around (shows a list of commands), ;start - (re)start a game, ;info - player stats and info')
+      player.say(
+        ';help - show this list, ' +
+        ';info - player stats and info, ' +
+        ';look - look around (shows a list of commands), ' +
+        ';persona - persona-related commands, ' +
+        ';start - (re)start a game '
+        )
 
     # ANY: look around
     elif (cmd in [ 'look', 'l', 'x' ]):
@@ -34,6 +41,11 @@ class Game:
     # ANY: stats
     elif (cmd in [ 'info', 'stats', 'st', 'i' ]):
       player.stats()
+
+    # ANY: persona commands
+    elif (cmd in [ 'persona', 'p' ]):
+      cmds.pop(0)
+      PersonaCommand.command(player, cmds)
 
     # VELVET: go to dungeon
     elif (cmd in [ 'dungeon', 'dung', 'dun' ]):

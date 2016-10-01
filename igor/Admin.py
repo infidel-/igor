@@ -10,7 +10,7 @@ from .Player import *
 class Admin:
 
 # ADMIN: entry point
-  def admin(player, cmds):
+  def command(player, cmds):
     cmd = cmds[0]
 
     # DUNGEON: go to dungeon level
@@ -50,6 +50,10 @@ class Admin:
 
       # give persona
       if (cmd2 == 'give'):
+        # help
+        if (player.level == 1):
+          player.say('No personas on level 1.')
+
         # give random
         if (len(cmds) == 2):
           player.giveRandomPersona(always = True)
@@ -58,8 +62,7 @@ class Admin:
           if (id not in PersonaList):
             player.say('No such persona.')
             return
-          player.personaKnown.append(id)
-          player.say(id + ' joins you!')
+          player.givePersona(id)
 
       # list personas
       elif (cmd2 == 'list'):
