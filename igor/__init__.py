@@ -53,9 +53,13 @@ def _command(bot, trigger):
       Game.intro(p)
 
     # ANY: game version and changes
-    elif (cmd in [ 'version', 'changes' ]):
+    elif (cmd in [ 'changes' ]):
       for msg in version:
         say(bot, trigger.nick, msg)
+
+    # ANY: game version
+    elif (cmd in [ 'version' ]):
+      say(bot, trigger.nick, version[0])
 
     # ADMIN: admin entry point
     elif (cmd in [ 'admin' ]):

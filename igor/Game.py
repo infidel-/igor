@@ -27,11 +27,13 @@ class Game:
     # ANY: help
     if (cmd in [ 'help', 'h' ]):
       player.say(
+        ';changes - game version and changes, ' +
         ';help - show this list, ' +
         ';info - player stats and info, ' +
         ';look - look around (shows a list of commands), ' +
         ';persona - persona-related commands, ' +
-        ';start - (re)start a game '
+        ';start - (re)start a game, ' +
+        ';version - game version'
         )
 
     # ANY: look around
