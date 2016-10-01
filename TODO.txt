@@ -30,6 +30,7 @@ admin give: personas with spaces in names
 persona levelup + gain skills
 ? absorb, reflect damage
 some shadow skills changed
+cross-player bulletin board (each player gets one message)
 
 different starting personas
 Fool-Orpheus

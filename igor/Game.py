@@ -3,6 +3,7 @@
 import random
 from .Global import *
 from .Enum import *
+from .Persona import *
 
 class Game:
 
@@ -190,6 +191,9 @@ class Game:
 
     if (len(cmds) < 2):
       player.say('Usage: ;skill <skill number>')
+      msg = 'Persona skills: '
+      msg += getPersonaSkills(player, player.persona)
+      player.say(msg)
       return
 
     index = -1

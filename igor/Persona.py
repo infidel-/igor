@@ -35,6 +35,22 @@ def getPersonaInfo(owner, persona, isShadow):
 
   return s
 
+
+# get skills list string
+def getPersonaSkills(owner, persona):
+  if (len(persona.skills) == 0):
+    return ''
+
+  s = ''
+  for i in range(0, len(persona.skills)):
+    s += str(i + 1) + ':'
+    sk = persona.skills[i]
+    s += sk.getNameAndCost(owner)
+    if (i < len(persona.skills) - 1):
+      s += ', '
+
+  return s
+
 # persona stats
 
 class PersonaStats:
