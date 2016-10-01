@@ -36,8 +36,18 @@ class Shadow:
 
 # recalc all stats
   def recalc(self):
+    oldhp = self.hp
+    oldsp = self.sp
+
     # copy stats from object
     self.__dict__.update(self.source.__dict__)
+
+    # fix old stats
+    self.hp = oldhp
+    self.sp = oldsp
+    self.isKnown = (self.name in self.player.shadowsKnown)
+    if (not self.isKnown):
+      self.name = "the shadow"
 
     # apply buffs and debuffs
     for k in self.buffs.keys():
@@ -53,6 +63,7 @@ class Shadow:
     self.trueName = self.name
 
     # fix stats
+    self.knockdown = 0
     self.maxHP = self.hp
     self.maxSP = self.sp
     self.atk = ShadowAtk[self.level]
@@ -68,7 +79,8 @@ class Shadow:
 
 global SkillList
 
-ShadowAtk = [ 0, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65 ]
+ShadowAtk = [ 0, 28, 35, 40, 47, 52, 58, 72, 86, 93, 101,
+  114, 120, 126, 133, 140, 146, 153, 160, 166, 200 ]
 ShadowCache = dict()
 ShadowList = dict()
 

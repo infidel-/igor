@@ -2,7 +2,6 @@
 =========
 
 fear skill
-their skills + rakunda, rakukaja
 exploit counter
 check if exp needs to be / 3
 die, dungeon -> goes to last room
@@ -15,6 +14,8 @@ disable admin commands in production!
 admin commands - try to make them available to admins
 admin info - games started, games won, player records, number of players
   that got to level X?
+rakukaja
+;feedback command - write stuff in a separate log?
 
 
 # STAGE 2
@@ -36,8 +37,11 @@ Hermit-Yomotsu Shikome
 
 shadow skills for sp?
 items - usables + weapon
+
+without analyze shows HP percentage for shadows
 analyze - persona descriptions
-on X hints auto-analyze
+on X hints auto-weak-analyze (no HP info, no skills)
+if guessed correctly, full analyze - HP info and skills
 
 Lying Hablerie
 It has a black tongue.

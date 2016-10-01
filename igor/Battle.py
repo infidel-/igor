@@ -56,10 +56,10 @@ class Battle:
     s = 'You can: ";' + '", ";'.join(cmds) + '".'
     self.player.say(s)
 
-# switch persona
-  def switchPersona(self, id):
-    # TODO: for now, any persona switch is instant
-    self.player.switchPersona(id)
+# change persona
+  def changePersona(self, id):
+    # TODO: for now, any persona change is instant
+    self.player.changePersona(id)
 
 
 # damage formula
@@ -255,7 +255,7 @@ class Battle:
     damage = 0
     msg = ''
     ret = None
-    if (len(self.shadow.skills) > 0 and rnd < 30):
+    if (len(self.shadow.skills) > 0 and rnd < 40):
       skill = self.shadow.skills[0]
 
       # calc and apply damage

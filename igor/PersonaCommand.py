@@ -8,13 +8,14 @@ class PersonaCommand:
   def command(player, cmds):
     # help
     if (len(cmds) == 0):
-      player.say(';persona: list - persona list, switch <persona number> - switch to different persona')
+      player.say(';persona: list - persona list, ' +
+        'change <persona number> - change to different persona')
       return
 
     cmd = cmds[0]
 
     # ANY: persona list
-    if (cmd == 'list'):
+    if (cmd in [ 'list', 'l' ]):
       cnt = 1
       for id in player.personaKnown:
         p = PersonaList[id]
@@ -24,15 +25,15 @@ class PersonaCommand:
         cnt += 1
         player.say(msg)
 
-    # ANY: switch persona
-    elif (cmd == 'switch'):
+    # ANY: change persona
+    elif (cmd in [ 'change', 'c' ]):
       id = int(cmds[1])
       if (id > len(player.personaKnown)):
         return
 
       # persona switch during the battle is different
       if (player.state == PlayerState.BATTLE):
-        player.battle.switchPersona(id - 1)
+        player.battle.changePersona(id - 1)
       else:
-        player.switchPersona(id - 1)
+        player.changePersona(id - 1)
 

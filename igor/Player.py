@@ -41,16 +41,16 @@ class Player:
     self.dungeon = Dungeon()
     self.battle = Battle(self)
 
-# switch persona
-  def switchPersona(self, id):
+# change persona
+  def changePersona(self, id):
     self.persona = self.personaInited[id]
-    self.say('You switch your persona to ' + self.persona.name + '.')
+    self.say('You change your persona to ' + self.persona.name + '.')
 
 
 # give random persona of appropriate level
   def giveRandomPersona(self, always = False):
-    # 30% chance
-    if (not always and random.randint(0, 100) > 30):
+    # 40% chance
+    if (not always and random.randint(0, 100) > 40):
       return
 
     # pick a persona
@@ -117,10 +117,17 @@ class Player:
     globals['bot'].say('/w ' + self.name + ' ' + msg)
 
 
-LevelAtk = [ 0, 42, 53, 60, 71, 78, 88, 108, 130, 140, 152 ]
-LevelHP = [ 0, 70, 82, 90, 105, 116, 126, 136, 146, 155, 164 ]
-LevelSP = [ 0, 41, 49, 56, 64, 72, 77, 84, 90, 96, 102 ]
+LevelAtk = [ 0, 42, 53, 60, 71, 78, 88, 108, 130, 140, 152,
+  172, 180, 190, 200, 210, 220, 230, 240, 250, 300
+  ]
+LevelHP = [ 0, 70, 82, 90, 105, 116, 126, 136, 146, 155, 164,
+   173, 182, 190, 199, 207, 215, 223, 230, 238, 245,
+  ]
+LevelSP = [ 0, 41, 49, 56, 64, 72, 77, 84, 90, 96, 102,
+  107, 113, 118, 123, 128, 133, 138, 142, 147, 151,
+  ]
 LevelXP = [ 0, ]
-for i in range(1, 11):
-  LevelXP.append(9 + 2 * i + i * i)
+for i in range(1, 16):
+#  LevelXP.append(9 + 2 * i + i * i)
+  LevelXP.append((9 + 2 * i + i * i) * 2)
 

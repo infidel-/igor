@@ -254,7 +254,14 @@ msg_version = [
   "version",
   ]
 
-msgs = msg_version
+msg_battle5 = [
+  "start",
+  "dungeon",
+  "admin level 7",
+  "admin battle",
+  ]
+
+msgs = msg_battle5
 
 
 def message(bot, m):
