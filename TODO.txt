@@ -4,13 +4,9 @@
 fear skill
 their skills + rakunda, rakukaja
 exploit counter
-
 check if exp needs to be / 3
 die, dungeon -> goes to last room
-version command
-  upload script changes VERSION file to have version and changelog, then uploads
-  at start module loads VERSION file
-  write about version command in help and channel description
+
 teleporters - return to velvet room for HP/SP restore on L5/L10,
   can return back
 boss

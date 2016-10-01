@@ -1,0 +1,9 @@
+#!/bin/bash
+GITVER=`git rev-list --count HEAD`
+DATE=`date +"%Y.%m.%d"`
+echo "# This file is auto-generated" > ./igor/VERSION.py
+echo -e "VERSION = \"\"\"Igor r$GITVER ($DATE)" >> ./igor/VERSION.py
+LASTTAG=`git describe --tags --abbrev=0 HEAD^`
+CHANGES=`git log $LASTTAG..HEAD --date=short --reverse --format="%ad%n%B"`
+#echo -e "CHANGES = \"\"\"\nChanges:\n$CHANGES\n\"\"\"" >> ./igor/VERSION.py
+echo -e "Changes:\n$CHANGES\n\"\"\"" >> ./igor/VERSION.py

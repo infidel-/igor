@@ -1,13 +1,17 @@
 #import sys
 #sys.path.append("./")
+import os
 from sopel import module
 from sopel import tools
 
+from .VERSION import *
 from .Global import *
 from .Admin import Admin
 from .Game import Game
 from .Player import Player
 
+# convert version string to string array
+version = VERSION.split("\n")
 
 # game setup
 def setup(bot):
@@ -47,6 +51,11 @@ def _command(bot, trigger):
     if (cmd in [ 'start', 'restart' ]):
       p = initPlayer(bot, trigger)
       Game.intro(p)
+
+    # ANY: game version and changes
+    elif (cmd in [ 'version', 'changes' ]):
+      for msg in version:
+        say(bot, trigger.nick, msg)
 
     # ADMIN: admin entry point
     elif (cmd in [ 'admin' ]):

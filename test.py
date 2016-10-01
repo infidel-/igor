@@ -248,8 +248,13 @@ msg_persona = [
   "look",
   ]
 
-#msgs = msg1
-msgs = msg_persona
+msg_version = [
+  "version",
+  "version",
+  "version",
+  ]
+
+msgs = msg_version
 
 
 def message(bot, m):
