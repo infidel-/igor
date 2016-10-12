@@ -27,7 +27,7 @@ class Game:
     # ANY: help
     if (cmd in [ 'help', 'h' ]):
       player.say(
-        ';changes - game version and changes, ' +
+#        ';changes - game version and changes, ' +
         ';help - show this list, ' +
         ';info - player stats and info, ' +
         ';look - look around (shows a list of commands), ' +
@@ -101,12 +101,12 @@ class Game:
 # new player intro
   def intro(player):
     player.say('"I see that we have a guest."')
-    player.say('"Why, hello there."')
+    player.say('"Hello there."')
     player.say('"My name is Igor and I welcome you to the Velvet Room."')
-    player.say('"Unfortunately, my assistant is on vacation."')
+#    player.say('"Unfortunately, my assistant is on vacation."')
 
     Game.look(player)
-    Game.command(player, [ 'help' ])
+#    Game.command(player, [ 'help' ])
 
 
 # ANY: look around

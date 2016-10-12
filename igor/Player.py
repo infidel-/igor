@@ -25,6 +25,7 @@ class Player:
   personaKnown = None
   personaInited = None
   shadowsKnown = None
+  msgs = None
 
 
   def __init__(self, name):
@@ -38,6 +39,7 @@ class Player:
     self.personaKnown = [ 'Izanagi' ]
     self.personaInited = [ self.persona ]
     self.shadowsKnown = []
+    self.msgs = []
     self.dungeon = Dungeon()
     self.battle = Battle(self)
 
@@ -114,7 +116,8 @@ class Player:
 
 # whisper to player
   def say(self, msg):
-    globals['bot'].say('/w ' + self.name + ' ' + msg)
+    self.msgs.append(msg)
+#    globals['bot'].say('/w ' + self.name + ' ' + msg)
 
 
 LevelAtk = [ 0, 42, 53, 60, 71, 78, 88, 108, 130, 140, 152,

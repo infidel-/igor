@@ -28,6 +28,7 @@ def command(bot, trigger):
     return
 
   _command(bot, trigger)
+  return
 
 
 # all whispers to bot
@@ -35,6 +36,7 @@ def command(bot, trigger):
 @module.rule('.*')
 def event(bot, trigger):
   _command(bot, trigger)
+  return
 
 
 # common command
@@ -44,6 +46,7 @@ def _command(bot, trigger):
       g = g[1:]
     cmds = g.split()
     cmd = cmds[0]
+    p = None
 
     # we do initial command thing here to avoid circular deps in
     # Game -> Player -> Battle -> Game
@@ -79,6 +82,11 @@ def _command(bot, trigger):
         return
 
       Game.command(p, cmds)
+
+    # actually say stuff
+    if (p != None and len(p.msgs) > 0):
+      say(bot, trigger.nick, ' '.join(p.msgs))
+      p.msgs = []
 
 
 ############################################
